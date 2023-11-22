@@ -11,19 +11,19 @@
             title: "Learning How to learn",
             image:
               "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
-            price: 4,
+            price: 50000,
           },
           {
             title: "Learning How to learn",
             image:
               "https://cdn0.fahasa.com/media/catalog/product/9/7/9780143132547.jpg",
-            price: 2,
+            price: 80000,
           },
           {
             title: "Learning How to learn",
             image:
               "https://img.ws.mms.shopee.vn/sg-11134201-22100-tyb5w27sc1iv35",
-            price: 3,
+            price: 65000,
           },
         ];
 
@@ -38,7 +38,7 @@
                 }
               } */
         books.sort(function (a, b) {
-          return a.year - b.year;
+          return a.price - b.price;
         });
         for (i = 0; i < books.length; i++) {
           document.getElementById(

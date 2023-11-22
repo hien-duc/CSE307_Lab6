@@ -8,25 +8,48 @@
   <body>
     <h1>MMSA of N Numbers</h1>
     <br />
-    <h10>Enter numbers separated by :</h10>
+    <h10>Enter numbers separated by commas:</h10>
     <input type="text" id="n" />
     <p id="res"></p>
     <button ondblclick="printNumbers()">Calculate MMSA</button>
     <script>
       function printNumbers() {
-        let n = [document.getElementById("n").value];
-        n.sort();
-        let res = document.getElementById("res").innerHTML;
-        let sum;
-        let avg;
-        for (let i = 0; i < n.length; i++) {
-          sum+=n[i];
+        if (!n || n < 0) {
+          document.getElementById("res").innerHTML =
+            "<strong>Please input valid number!</strong>";
+        } else {
+          let n = document.getElementById("n").value;
+          let arr = n.split(",");
+          arr = toNumber(arr);
+          let sortArr = arr.sort(function (a, b) {
+            return a - b;
+          });
+
+          let sum = 0;
+          let avg = 0;
+          for (let i = 0; i < sortArr.length; i++) {
+            sum += sortArr[i];
+          }
+          avg = sum / sortArr.length;
+          document.getElementById("res").innerHTML =
+            "Min = " +
+            sortArr[0] +
+            " " +
+            "Max = " +
+            sortArr[sortArr.length - 1] +
+            " " +
+            "Sum = " +
+            sum +
+            " " +
+            "Avg = " +
+            avg;
         }
-        avg = sum/n.length;
-        res += "Min = " + n[0];
-        res += "Max = " + n[3];
-        res += "Sum = " + sum;
-        res += "Avg = " + avg;
+        function toNumber(arr) {
+          for (let i = 0; i < arr.length; i++) {
+            arr[i] = parseInt(arr[i]);
+          }
+          return arr;
+        }
       }
     </script>
   </body>
