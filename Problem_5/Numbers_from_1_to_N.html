@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Numbers from 1 to N</title>
+  </head>
+  <body>
+    <h1>Numbers from 1 to N</h1>
+    <br />
+    <h10>Enter a positive number N:</h10>
+    <input type="text" id="n" />
+    <p id="res"></p>
+    <button ondblclick="printNumbers()">Print Numbers</button>
+    <script>
+      function printNumbers() {
+        let n = document.getElementById("n").value;
+        n = parseInt(n); 
+        for (var i = 1; i <= n; i++) {
+          document.getElementById("res").innerText += " "+i;
+        }
+      }
+    </script>
+  </body>
+</html>

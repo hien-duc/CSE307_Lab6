@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parsing_numbers</title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td>str</td>
+        <td>parseInt(str)</td>
+        <td>parseFloat(str)</td>
+        <td>Number(str)</td>
+        <td>+str</td>
+        <td>str|0</td>
+      </tr>
+      <tr>
+        <td id="str1">1234</td>
+        <td id="p1">?</td>
+        <td id="p2">?</td>
+        <td id="p3">?</td>
+        <td id="p4">?</td>
+        <td id="p5">?</td>
+      </tr>
+      <tr>
+        <td id="str2">1234abc</td>
+        <td id="p6">?</td>
+        <td id="p7">?</td>
+        <td id="p8">?</td>
+        <td id="p9">?</td>
+        <td id="p10">?</td>
+      </tr>
+      <tr>
+        <td id="str3">0.15</td>
+        <td id="p11">?</td>
+        <td id="p12">?</td>
+        <td id="p13">?</td>
+        <td id="p14">?</td>
+        <td id="p15">?</td>
+      </tr>
+      <tr>
+        <td id="str4">3.14ivan</td>
+        <td id="p16">?</td>
+        <td id="p17">?</td>
+        <td id="p18">?</td>
+        <td id="p19">?</td>
+        <td id="p20">?</td>
+      </tr>
+      <tr>
+        <td id="str5">Infinity</td>
+        <td id="p21">?</td>
+        <td id="p22">?</td>
+        <td id="p23">?</td>
+        <td id="p24">?</td>
+        <td id="p25">?</td>
+      </tr>
+      <tr>
+        <td id="str6">99999999999999999999</td>
+        <td id="p26">?</td>
+        <td id="p27">?</td>
+        <td id="p28">?</td>
+        <td id="p29">?</td>
+        <td id="p30">?</td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <center><button onclick="start()">Start</button></center>
+        </td>
+      </tr>
+      <script>
+        function start() {
+          document.getElementById("p1").innerText = parseInt("1234");
+          document.getElementById("p2").innerText = parseFloat("1234");
+          document.getElementById("p3").innerText = Number("1234");
+          document.getElementById("p4").innerText = +"1234";
+          document.getElementById("p5").innerText = "1234" ^ 0;
+          //////////////////////
+          document.getElementById("p6").innerText = parseInt("1234abc");
+          document.getElementById("p7").innerText = parseFloat("1234abc");
+          document.getElementById("p8").innerText = Number("1234abc");
+          document.getElementById("p9").innerText = "1234abc" + "1234abc";
+          document.getElementById("p10").innerText = "1234abc" ^ 0;
+          //////////////////////
+          document.getElementById("p11").innerText = parseInt("0.15");
+          document.getElementById("p12").innerText = parseFloat("0.15");
+          document.getElementById("p13").innerText = Number("0.15");
+          document.getElementById("p14").innerText = "0.15" + "0.15";
+          document.getElementById("p15").innerText = "0.15" ^ 0;
+          ///////////////////////
+          document.getElementById("p16").innerText = parseInt("3.14ivan");
+          document.getElementById("p17").innerText = parseFloat("3.14ivan");
+          document.getElementById("p18").innerText = Number("3.14ivan");
+          document.getElementById("p19").innerText = "3.14ivan" + "3.14ivan";
+          document.getElementById("p20").innerText = "3.14ivan" ^ 0;
+          ////////////////////////
+
+          document.getElementById("p21").innerText = parseInt("Infinity");
+          document.getElementById("p22").innerText = parseFloat("Infinity");
+          document.getElementById("p23").innerText = Number("Infinity");
+          document.getElementById("p24").innerText = "Infinity" + "Infinity";
+          document.getElementById("p25").innerText = "Infinity" ^ 0;
+          //////////////////////////////
+          document.getElementById("p26").innerText = parseInt(
+            "99999999999999999999"
+          );
+          document.getElementById("p27").innerText = parseFloat(
+            "99999999999999999999"
+          );
+          document.getElementById("p28").innerText = Number(
+            "99999999999999999999"
+          );
+          document.getElementById("p29").innerText = +"99999999999999999999";
+          document.getElementById("p30").innerText = "99999999999999999999" ^ 0;
+        }
+      </script>
+    </table>
+  </body>
+</html>

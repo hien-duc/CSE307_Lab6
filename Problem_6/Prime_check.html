@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prime check</title>
+  </head>
+  <body>
+    <h1>Prime Check</h1>
+    <br />
+    <h10>Enter a positive number N:</h10>
+    <input type="text" id="n" />
+    <p id="res"></p>
+    <button ondblclick="printNumbers()">Print Numbers</button>
+    <script>
+      function printNumbers() {
+        let n = document.getElementById("n").value;
+        let count = 0;
+        for (i = 1; i <= n; i++) {
+          if (n % i == 0) {
+            count++;
+          }
+        }
+        if (count == 2) {
+          document.getElementById("res").innerHTML = "<strong>True</strong>";
+        } else {
+          document.getElementById("res").innerHTML = "<strong>False</strong>";
+        }
+      }
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compare Array of Objects</title>
+    <script>
+      function Show() {
+        let books = [
+          {
+            title: "Learning How to learn",
+            image:
+              "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
+            price: 4,
+          },
+          {
+            title: "Learning How to learn",
+            image:
+              "https://cdn0.fahasa.com/media/catalog/product/9/7/9780143132547.jpg",
+            price: 2,
+          },
+          {
+            title: "Learning How to learn",
+            image:
+              "https://img.ws.mms.shopee.vn/sg-11134201-22100-tyb5w27sc1iv35",
+            price: 3,
+          },
+        ];
+
+        /* for (i = 0; i < books.length; i++) {
+                for (j = 1; j < books.length; j++) {
+                  if (books[j].price < books[i].price) {
+                    let temp = books[j];
+                    books[j] = books[i];
+                    books[i] = temp;
+                    break;
+                  }
+                }
+              } */
+        books.sort(function (a, b) {
+          return a.year - b.year;
+        });
+        for (i = 0; i < books.length; i++) {
+          document.getElementById(
+            "result"
+          ).innerHTML += ` <div style='flex:30%'>
+                              <p id='title'>${books[i].title}</p>
+                              <img id='img' width=100
+                                  src='${books[i].image}' />
+                              <p id='price'>
+                                  ${books[i].price} VND
+                              </p>
+                          </div>`;
+        }
+      }
+    </script>
+  </head>
+  <body onload="Show()">
+    <div id="result" style="display: flex"></div>
+  </body>
+</html>
