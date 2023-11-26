@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product List</title>
+    <script>
+      let books = [
+        {
+          id: "1",
+          title: "The Alchemist",
+          image:
+            "http://freepdfbook.com/wp-content/uploads/2021/05/0ebe9efa94145d429dd90c6243ed2f82.jpeg",
+          price: 200000,
+          quantity: 20,
+        },
+
+        {
+          id: "2",
+          title: "Learning How to learn",
+          image:
+            "https://curatella.com/wp-content/uploads/2020/09/learning-how-to-learn-book-cover-scaled.jpg",
+          price: 251100,
+          quantity: 10,
+        },
+        {
+          id: "3",
+          title: "Thinking, Fast Slow",
+          image:
+            "http://static1.businessinsider.com/image/541748b0eab8eade098fda39-1200/thinking-fast-and-slow-2011.jpg",
+          price: 299700,
+          quantity: 7,
+        },
+      ];
+
+      function Add() {
+        document.getElementById("result").innerHTML = "";
+        books.push({
+          id: "4",
+          title: "Test",
+          image:
+            "http://static1.businessinsider.com/image/541748b0eab8eade098fda39-1200/thinking-fast-and-slow-2011.jpg",
+          price: 299700,
+          quantity: 7,
+        });
+        for (i = 0; i < books.length; i++) {
+          document.getElementById(
+            "result"
+          ).innerHTML += ` <div style='flex:30%'>
+                        <p id='title'>${books[i].title}</p>
+                        <img id='img' width=100
+                            src='${books[i].image}' />
+                        <p id='price'>
+                            ${books[i].price} VND
+                        </p>
+                    </div>`;
+        }
+      }
+
+      function Show() {
+        for (i = 0; i < books.length; i++) {
+          document.getElementById(
+            "result"
+          ).innerHTML += ` <div style='flex:30%'>
+                        <p id='title'>${books[i].title}</p>
+                        <img id='img' width=100
+                            src='${books[i].image}' />
+                        <p id='price'>
+                            ${books[i].price} VND
+                        </p>
+                    </div>`;
+        }
+      }
+      function Sort() {
+        books.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      }
+
+      function Search() {
+        let name = document.getElementById("txt").value;
+        let result = "";
+
+        for (i = 0; i < books.length; i++) {
+          if (books[i].title.includes(name)) {
+            result += ` <div style='flex:30%'>
+                        <p id='title'>${books[i].title}</p>
+                        <img id='img' width=100
+                            src='${books[i].image}' />
+                        <p id='price'>
+                            ${books[i].price} VND
+                        </p>
+                    </div>`;
+          }
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+
+      function Delete() {
+        let id = document.getElementById("txtD").value;
+        let result = "";
+
+        for (i = 0; i < books.length; i++) {
+          if (!books[i].id.includes(id)) {
+            result += ` <div style='flex:30%'>
+            <p id='title'>${books[i].title}</p>
+            <img id='img' width=100
+                src='${books[i].image}' />
+            <p id='price'>
+                ${books[i].price} VND
+            </p>
+        </div>`;
+          }
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+    </script>
+  </head>
+
+  <body onload="Show()">
+    <div id="result" style="display: flex"></div>
+
+    <input type="button" onclick="Add()" value="Add item" />
+    <input type="button" onclick="Sort()" value="Sort" />
+
+    <div id="Search">
+      <form action="">
+        <input type="text" id="txt" />
+        <input type="button" onclick="Search()" value="Search" />
+      </form>
+    </div>
+
+    <div id="Delete">
+      <form action="">
+        <input type="text" id="txtD" />
+        <input type="button" onclick="Delete()" value="Delete" />
+      </form>
+    </div>
+  </body>
+</html>
