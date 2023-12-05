@@ -3,63 +3,198 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product List</title>
-    <script src="pro.js"></script>
+    <title>Product Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      #result {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+      .product-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+    </style>
   </head>
+  <body>
+    <h2>Product List</h2>
+    <button onclick="sortProducts()">Sort by Product Name</button>
+    <br /><br />
 
-  <body onload="Show(books)">
-    <table>
-      <tr>
-        <td>Name:</td>
-        <td>
-          <input id="tiltleInput" type="text" placeholder="Input name here" />
-        </td>
+    <div id="result"></div>
 
-        <td>Quantity:</td>
-        <td>
-          <input
-            id="quantityInput"
-            type="text"
-            placeholder="Input quantity here"
-          />
-        </td>
+    <button onclick="addProductToHead()">Add Product to Head</button>
+    <button onclick="addProductToTail()">Add Product to Tail</button>
+    <br /><br />
 
-        <td>Img Link:</td>
-        <td>
-          <input id="imgInput" type="text" placeholder="Input image here" />
-        </td>
+    <label for="searchProductName">Search by Product Name:</label>
+    <input type="text" id="searchProductName" oninput="searchProducts()" />
+    <br /><br />
 
-        <td>Price:</td>
-        <td>
-          <input id="priceInput" type="text" placeholder="Input price here" />
-        </td>
-      </tr>
-    </table>
+    <label for="removeProductId">Remove Product by ID:</label>
+    <input type="text" id="removeProductId" />
+    <button onclick="removeProduct()">Remove Product</button>
+    <br /><br />
 
-    <br />
-    <input
-      type="button"
-      onclick="addBookAtEnd()"
-      value="Add product to the bottom"
-    />
-    <input
-      type="button"
-      onclick="addBookAtBeginning()"
-      value="Add product to the top"
-    />
-    <input type="button" onclick="Sort()" value="Sort product" />
-    <br />
-    <br />
-    <input id="search" type="text" placeholder="Search by name" />
-    <input type="button" onclick="Search()" value="Search" />
-    <input id="remove" type="text" placeholder="Remove" />
-    <input type="button" onclick="Delete()" value="Remove" />
-    <input id="reset" type="button" onclick="Show(books)" value="Reset" />
-    <br />
-    <br />
+    <label for="editProductId">Edit Product by ID:</label>
+    <input type="text" id="editProductId" />
+    <button onclick="editProduct()">Edit Product</button>
+    <br /><br />
 
-    <div id="result" style="display: flex"></div>
+    <script>
+      let productList = [
+        {
+          id: 1,
+          name: "Product A",
+          quantity: 10,
+          price: 20.99,
+          image:
+            "http://freepdfbook.com/wp-content/uploads/2021/05/0ebe9efa94145d429dd90c6243ed2f82.jpeg",
+        },
+        {
+          id: 2,
+          name: "Product B",
+          quantity: 5,
+          price: 15.49,
+          image:
+            "https://curatella.com/wp-content/uploads/2020/09/learning-how-to-learn-book-cover-scaled.jpg",
+        },
+        {
+          id: 3,
+          name: "Product C",
+          quantity: 8,
+          price: 25.99,
+          image:
+            "http://static1.businessinsider.com/image/541748b0eab8eade098fda39-1200/thinking-fast-and-slow-2011.jpg",
+        },
+      ];
 
-    <script src="pro.js"></script>
+      function displayProducts(products = productList) {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "";
+
+        products.forEach((product) => {
+          const productCard = document.createElement("div");
+          productCard.classList.add("product-card");
+          productCard.innerHTML = `
+                <p>ID: ${product.id}</p>
+                <p>Name: ${product.name}</p>
+                <p>Quantity: ${product.quantity}</p>
+                <p>Price: ${product.price}</p>
+                <img src="${product.image}" alt="${product.name}">
+                <button onclick="removeProductById(${product.id})">Remove</button>
+            `;
+          resultDiv.appendChild(productCard);
+        });
+      }
+
+      function sortProducts() {
+        productList.sort((a, b) => a.name.localeCompare(b.name));
+        displayProducts();
+      }
+
+      function addProductToHead() {
+        const newProduct = {
+          id: productList.length + 1,
+          name: "New Product",
+          quantity: 0,
+          price: 0,
+          image:
+            "http://static1.businessinsider.com/image/541748b0eab8eade098fda39-1200/thinking-fast-and-slow-2011.jpg",
+        };
+        productList.unshift(newProduct);
+        displayProducts();
+      }
+
+      function addProductToTail() {
+        const newProduct = {
+          id: productList.length + 1,
+          name: "New Product",
+          quantity: 0,
+          price: 0,
+          image:
+            "http://static1.businessinsider.com/image/541748b0eab8eade098fda39-1200/thinking-fast-and-slow-2011.jpg",
+        };
+        productList.push(newProduct);
+        displayProducts();
+      }
+
+      function searchProducts() {
+        const searchInput = document
+          .getElementById("searchProductName")
+          .value.toLowerCase();
+        const filteredProducts = productList.filter((product) =>
+          product.name.toLowerCase().includes(searchInput)
+        );
+        displayProducts(filteredProducts);
+      }
+
+      function removeProductById(productId) {
+        productList = productList.filter((product) => product.id !== productId);
+        displayProducts();
+      }
+
+      function removeProduct() {
+        const productIdToRemove = parseInt(
+          document.getElementById("removeProductId").value
+        );
+        removeProductById(productIdToRemove);
+      }
+
+      function editProduct() {
+        const productIdToEdit = parseInt(
+          document.getElementById("editProductId").value
+        );
+        const productToEdit = productList.find(
+          (product) => product.id === productIdToEdit
+        );
+
+        if (productToEdit) {
+          const newName = prompt("Enter the new name:", productToEdit.name);
+          const newQuantity = parseInt(
+            prompt("Enter the new quantity:", productToEdit.quantity)
+          );
+          const newPrice = parseFloat(
+            prompt("Enter the new price:", productToEdit.price)
+          );
+          const newImage = prompt(
+            "Enter the new image URL:",
+            productToEdit.image
+          );
+
+          if (
+            newName !== null &&
+            !isNaN(newQuantity) &&
+            !isNaN(newPrice) &&
+            newImage !== null
+          ) {
+            productToEdit.name = newName;
+            productToEdit.quantity = newQuantity;
+            productToEdit.price = newPrice;
+            productToEdit.image = newImage;
+
+            displayProducts();
+          } else {
+            alert("Invalid input. Please try again.");
+          }
+        } else {
+          alert("Product not found. Please enter a valid ID.");
+        }
+      }
+
+      // Initial display
+      displayProducts();
+    </script>
   </body>
 </html>
